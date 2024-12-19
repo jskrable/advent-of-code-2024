@@ -1,6 +1,7 @@
 package main
 
 import (
+	lib "advent-of-code/lib"
 	"encoding/csv"
 	"fmt"
 	"math"
@@ -34,12 +35,6 @@ func getLists() ([]int64, []int64) {
 	return a, b
 }
 
-func remove(s []int64, i int) []int64 {
-	ret := make([]int64, 0)
-	ret = append(ret, s[:i]...)
-	return append(ret, s[i+1:]...)
-}
-
 func findMinIndex(s []int64) int {
 	index := 0
 	min := s[index]
@@ -59,8 +54,8 @@ func calcTotalDistance(a []int64, b []int64) int64 {
 		minA := findMinIndex(a)
 		minB := findMinIndex(b)
 		dist += int64(math.Abs(float64(a[minA] - b[minB])))
-		a = remove(a, minA)
-		b = remove(b, minB)
+		a = lib.RemoveIndex(a, minA)
+		b = lib.RemoveIndex(b, minB)
 	}
 	return dist
 }
